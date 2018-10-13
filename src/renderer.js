@@ -1,6 +1,10 @@
-const ipc = require('electron').ipcRenderer;
+const {
+    ipcRenderer
+} = require('electron');
 const util = require('util');
 const fs = require('fs');
+
+// listen for form to be submitted by user
 
 const submitListener = document
     .querySelector('form')
@@ -20,17 +24,17 @@ const submitListener = document
         }))
 
         // send data to the main process
-        ipc.send('files', filesFormatted);
+        ipcRenderer.send('files', filesFormatted);
     })
 
 // analyse metadata from main prcoess
-ipc.on('metadata', (event, metadata) => {
+ipcRenderer.on('metadata', (event, metadata) => {
     const pre = document.getElementById('data')
 
     pre.innerText = JSON.stringify(metadata, null, 2)
 })
 
 // error handler from catch block in main process
-ipc.on('metadata:error', (event, error) => {
-    console.error(error);
+ipcRenderer.on('metadata:error', (event, error) => {
+    console.log(error);
 })

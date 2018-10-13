@@ -1,13 +1,11 @@
-const electron = require('electron');
-const ipcMain = electron.ipcMain;
+const {
+    app,
+    BrowserWindow,
+    ipcMain
+} = require('electron');
 const path = require('path');
 const util = require('util');
 const fs = require('fs');
-
-const {
-    app,
-    BrowserWindow
-} = require('electron');
 
 // allow fs.stat to use promises
 const stat = util.promisify(fs.stat)
@@ -36,7 +34,9 @@ ipcMain.on('files', async (event, filesArr) => {
                 pathName
             }))
         )
-        mainWindows.webContents.send('metadata', data)
+
+
+        mainWindow.webContents.send('metadata', data)
     } catch (error) {
         mainWindow.webContents.send('metadata:error', error)
     }
