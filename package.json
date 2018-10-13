@@ -2,9 +2,9 @@
   "name": "MetaData",
   "version": "1.0.0",
   "description": "Desktop app that presents a file's MetaData using Electron",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
